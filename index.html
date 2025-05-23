@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Healthy Food Alternatives</title>
+<style>
+  :root {
+    --color-bg-light: #f5f5f5;
+    --color-text-light: #222;
+    --color-card-light: #fff;
+    --color-bg-dark: #121212;
+    --color-text-dark: #eee;
+    --color-card-dark: #1e1e1e;
+    --color-accent: #ff6f61;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background: var(--color-bg-light);
+    color: var(--color-text-light);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  body.dark {
+    background: var(--color-bg-dark);
+    color: var(--color-text-dark);
+  }
+
+  header {
+    background: var(--color-accent);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  #toggleModeBtn {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #toggleModeBtn:hover {
+    background: white;
+    color: var(--color-accent);
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .recipe-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .recipe-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .recipe-card {
+    background: var(--color-card-light);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  body.dark .recipe-card {
+    background: var(--color-card-dark);
+    box-shadow: 0 2px 12px rgb(255 255 255 / 0.05);
+  }
+
+  .recipe-card:hover {
+    box-shadow: 0 6px 20px rgb(255 111 97 / 0.5);
+  }
+
+  .recipe-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .recipe-title {
+    font-weight: 700;
+    margin: 0 0 0.3rem 0;
+    font-size: 1.2rem;
+  }
+
+  .recipe-summary {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    flex-grow: 1;
+  }
+
+  .nutrition {
+    font-size: 0.85rem;
+    background: var(--color-accent);
+    color: white;
+    padding: 0.4rem 0.7rem;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* Modal Styles */
+  #modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    z-index: 1000;
+  }
+
+  #modalOverlay.active {
+    display: flex;
+  }
+
+  #modalContent {
+    background: var(--color-card-light);
+    max-width: 600px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    color: var(--color-text-light);
+  }
+
+  body.dark #modalContent {
+    background: var(--color-card-dark);
+    color: var(--color-text-dark);
+  }
+
+  #modalContent h3 {
+    margin-top: 0;
+  }
+
+  #modalContent img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  #closeModalBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #888;
+  }
+
+  body.dark footer {
+    color: #bbb;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Healthy Food Alternatives</h1>
+  <button id="toggleModeBtn" aria-label="Toggle Light/Dark Mode">Dark Mode</button>
+</header>
+
+<main>
+  <!-- Indian Section -->
+  <section id="indian">
+    <h2>Indian Cuisine Alternatives</h2>
+    <div class="recipe-list">
+      <article class="recipe-card" tabindex="0" data-recipe="indian1">
+        <img src="https://images.unsplash.com/photo-1617191518965-860c78c9bc3b?auto=format&fit=crop&w=600&q=80" alt="Baked Samosa with Sweet Potato Filling" />
+        <h3 class="recipe-title">Baked Samosa with Sweet Potato Filling</h3>
+        <p class="recipe-summary">A healthier baked alternative to deep-fried samosas using sweet potatoes and whole wheat.</p>
+        <span class="nutrition">Calories: 180 | Protein: 4g | Fat: 5g | Carbs: 30g</span>
+      </article>
+      <article class="recipe-card" tabindex="0" data-recipe="indian2">
+        <img src="https://images.unsplash.com/photo-1589308078059-3b37d83f9a40?auto=format&fit=crop&w=600&q=80" alt="Quinoa Vegetable Pulao" />
+        <h3 class="recipe-title">Quinoa Vegetable Pulao</h3>
+        <p class="recipe-summary">Protein-rich quinoa cooked with colorful veggies and fragrant Indian spices.</p>
+        <span class="nutrition">Calories: 220 | Protein: 7g | Fat: 4g | Carbs: 38g</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- Mediterranean Section -->
+  <section id="mediterranean">
+    <h2>Mediterranean Cuisine Alternatives</h2>
+    <div class="recipe-list">
+      <article class="recipe-card" tabindex="0" data-recipe="mediterranean1">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Grilled Falafel with Tzatziki Sauce" />
+        <h3 class="recipe-title">Grilled Falafel with Tzatziki Sauce</h3>
+        <p class="recipe-summary">Baked falafel balls served with low-fat Greek yogurt tzatziki for a protein-packed snack.</p>
+        <span class="nutrition">Calories: 210 | Protein: 9g | Fat: 6g | Carbs: 28g</span>
+      </article>
+      <article class="recipe-card" tabindex="0" data-recipe="mediterranean2">
+        <img src="https://images.unsplash.com/photo-1525610553991-2bede1a236e2?auto=format&fit=crop&w=600&q=80" alt="Zucchini Noodles with Pesto & Cherry Tomatoes" />
+        <h3 class="recipe-title">Zucchini Noodles with Pesto & Cherry Tomatoes</h3>
+        <p class="recipe-summary">Low-carb zucchini noodles tossed in fresh basil pesto with juicy cherry tomatoes.</p>
+        <span class="nutrition">Calories: 190 | Protein: 5g | Fat: 12g | Carbs: 12g</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- Western Section -->
+  <section id="western">
+    <h2>Western Cuisine Alternatives</h2>
+    <div class="recipe-list">
+      <article class="recipe-card" tabindex="0" data-recipe="western1">
+        <img src="https://images.unsplash.com/photo-1601924928571-27cdd4dbb43a?auto=format&fit=crop&w=600&q=80" alt="Cauliflower Crust Pizza" />
+        <h3 class="recipe-title">Cauliflower Crust Pizza</h3>
+        <p class="recipe-summary">A gluten-free cauliflower crust pizza loaded with veggies and mozzarella cheese.</p>
+        <span class="nutrition">Calories: 250 | Protein: 12g | Fat: 10g | Carbs: 18g</span>
+      </article>
+      <article class="recipe-card" tabindex="0" data-recipe="western2">
+        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Turkey Lettuce Wraps" />
+        <h3 class="recipe-title">Turkey Lettuce Wraps</h3>
+        <p class="recipe-summary">Lean turkey cooked with herbs and spices served in crisp lettuce cups.</p>
+        <span class="nutrition">Calories: 160 | Protein: 20g | Fat: 6g | Carbs: 4g</span>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- Modal for Recipe Details -->
+<div id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+  <div id="modalContent">
+    <button id="closeModalBtn" aria-label="Close recipe details">Close</button>
+    <img id="modalImage" src="" alt="" />
+    <h3 id="modalTitle"></h3>
+    <p id="modalSummary"></p>
+    <h4>Ingredients:</h4>
+    <ul id="modalIngredients"></ul>
+    <h4>Preparation:</h4>
+    <ol id="modalSteps"></ol>
+    <h4>Nutritional Information:</h4>
+    <p id="modalNutrition"></p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Healthy Food Alternatives. All rights reserved.
+</footer>
+
+<script>
+  // Recipe details data
+  const recipes = {
+    indian1: {
+      title: "Baked Samosa with Sweet Potato Filling",
+      summary: "A healthier baked alternative to deep-fried samosas using sweet potatoes and whole wheat.",
+      image: "https://images.unsplash.com/photo-1617191518965-860c78c9bc3b?auto=format&fit=crop&w=800&q=80",
+      ingredients: [
+        "1 cup mashed sweet potatoes",
+        "1 cup boiled green peas",
+        "2 cups whole wheat flour",
+        "1 tsp cumin seeds",
+        "1 tsp garam masala",
+        "Salt to taste",
+        "2 tbsp olive oil",
+        "Water as needed"
+      ],
+      steps: [
+        "Prepare dough by mixing whole wheat flour, salt, olive oil, and water. Knead well and let it rest.",
+        "Mix mashed sweet potatoes, boiled peas, cumin seeds, garam masala, and salt to prepare filling.",
+        "Divide dough into small balls and roll into circles.",
+        "Cut each circle in
