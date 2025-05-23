@@ -105,8 +105,10 @@
     box-shadow: 0 2px 12px rgb(255 255 255 / 0.05);
   }
 
-  .recipe-card:hover {
+  .recipe-card:hover,
+  .recipe-card:focus {
     box-shadow: 0 6px 20px rgb(255 111 97 / 0.5);
+    outline: none;
   }
 
   .recipe-card img {
@@ -199,8 +201,25 @@
     border-radius: 4px;
   }
 
-  ul {
+  ul, ol {
     padding-left: 1.2rem;
+  }
+
+  .side-by-side {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .side-by-side > div {
+    flex: 1 1 45%;
+  }
+
+  .modal-section-title {
+    margin-top: 0.8rem;
+    margin-bottom: 0.3rem;
+    color: var(--color-accent);
+    font-weight: 700;
   }
 
   footer {
@@ -228,13 +247,13 @@
     <h2>Indian Cuisine Alternatives</h2>
     <div class="recipe-list">
       <article class="recipe-card" tabindex="0" data-recipe="indian1">
-        <img src="https://images.unsplash.com/photo-1617191518965-860c78c9bc3b?auto=format&fit=crop&w=600&q=80" alt="Baked Samosa with Sweet Potato Filling" />
+        <img src="https://cdn.pixabay.com/photo/2016/03/05/20/02/samosa-1238618_1280.jpg" alt="Baked Samosa with Sweet Potato Filling" />
         <h3 class="recipe-title">Baked Samosa with Sweet Potato Filling</h3>
         <p class="recipe-summary">A healthier baked alternative to deep-fried samosas using sweet potatoes and whole wheat.</p>
         <span class="nutrition">Calories: 180 | Protein: 4g | Fat: 5g | Carbs: 30g</span>
       </article>
       <article class="recipe-card" tabindex="0" data-recipe="indian2">
-        <img src="https://images.unsplash.com/photo-1589308078059-3b37d83f9a40?auto=format&fit=crop&w=600&q=80" alt="Quinoa Vegetable Pulao" />
+        <img src="https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2294776_1280.jpg" alt="Quinoa Vegetable Pulao" />
         <h3 class="recipe-title">Quinoa Vegetable Pulao</h3>
         <p class="recipe-summary">Protein-rich quinoa cooked with colorful veggies and fragrant Indian spices.</p>
         <span class="nutrition">Calories: 220 | Protein: 7g | Fat: 4g | Carbs: 38g</span>
@@ -247,13 +266,13 @@
     <h2>Mediterranean Cuisine Alternatives</h2>
     <div class="recipe-list">
       <article class="recipe-card" tabindex="0" data-recipe="mediterranean1">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Grilled Falafel with Tzatziki Sauce" />
+        <img src="https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2294773_1280.jpg" alt="Grilled Falafel with Tzatziki Sauce" />
         <h3 class="recipe-title">Grilled Falafel with Tzatziki Sauce</h3>
         <p class="recipe-summary">Baked falafel balls served with low-fat Greek yogurt tzatziki for a protein-packed snack.</p>
         <span class="nutrition">Calories: 210 | Protein: 9g | Fat: 6g | Carbs: 28g</span>
       </article>
       <article class="recipe-card" tabindex="0" data-recipe="mediterranean2">
-        <img src="https://images.unsplash.com/photo-1525610553991-2bede1a236e2?auto=format&fit=crop&w=600&q=80" alt="Zucchini Noodles with Pesto & Cherry Tomatoes" />
+        <img src="https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2294766_1280.jpg" alt="Zucchini Noodles with Pesto & Cherry Tomatoes" />
         <h3 class="recipe-title">Zucchini Noodles with Pesto & Cherry Tomatoes</h3>
         <p class="recipe-summary">Low-carb zucchini noodles tossed in fresh basil pesto with juicy cherry tomatoes.</p>
         <span class="nutrition">Calories: 190 | Protein: 5g | Fat: 12g | Carbs: 12g</span>
@@ -266,13 +285,13 @@
     <h2>Western Cuisine Alternatives</h2>
     <div class="recipe-list">
       <article class="recipe-card" tabindex="0" data-recipe="western1">
-        <img src="https://images.unsplash.com/photo-1601924928571-27cdd4dbb43a?auto=format&fit=crop&w=600&q=80" alt="Cauliflower Crust Pizza" />
+        <img src="https://cdn.pixabay.com/photo/2017/02/16/18/48/pizza-2075409_1280.jpg" alt="Cauliflower Crust Pizza" />
         <h3 class="recipe-title">Cauliflower Crust Pizza</h3>
         <p class="recipe-summary">A gluten-free cauliflower crust pizza loaded with veggies and mozzarella cheese.</p>
         <span class="nutrition">Calories: 250 | Protein: 12g | Fat: 10g | Carbs: 18g</span>
       </article>
       <article class="recipe-card" tabindex="0" data-recipe="western2">
-        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Turkey Lettuce Wraps" />
+        <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/lettuce-wraps-1238699_1280.jpg" alt="Turkey Lettuce Wraps" />
         <h3 class="recipe-title">Turkey Lettuce Wraps</h3>
         <p class="recipe-summary">Lean turkey cooked with herbs and spices served in crisp lettuce cups.</p>
         <span class="nutrition">Calories: 160 | Protein: 20g | Fat: 6g | Carbs: 4g</span>
@@ -288,12 +307,25 @@
     <img id="modalImage" src="" alt="" />
     <h3 id="modalTitle"></h3>
     <p id="modalSummary"></p>
-    <h4>Ingredients:</h4>
-    <ul id="modalIngredients"></ul>
-    <h4>Preparation:</h4>
-    <ol id="modalSteps"></ol>
-    <h4>Nutritional Information:</h4>
-    <p id="modalNutrition"></p>
+
+    <div class="side-by-side">
+      <div>
+        <h4 class="modal-section-title">Healthy Alternative</h4>
+        <h5>Ingredients:</h5>
+        <ul id="modalIngredientsHealthy"></ul>
+        <h5>Preparation:</h5>
+        <ol id="modalStepsHealthy"></ol>
+        <p><strong>Nutritional Info:</strong> <span id="modalNutritionHealthy"></span></p>
+      </div>
+      <div>
+        <h4 class="modal-section-title">Unhealthy Version</h4>
+        <h5>Ingredients:</h5>
+        <ul id="modalIngredientsUnhealthy"></ul>
+        <h5>Preparation:</h5>
+        <ol id="modalStepsUnhealthy"></ol>
+        <p><strong>Nutritional Info:</strong> <span id="modalNutritionUnhealthy"></span></p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -302,24 +334,122 @@
 </footer>
 
 <script>
-  // Recipe details data
+  // Recipes Data: Healthy & Unhealthy Versions
   const recipes = {
     indian1: {
       title: "Baked Samosa with Sweet Potato Filling",
       summary: "A healthier baked alternative to deep-fried samosas using sweet potatoes and whole wheat.",
-      image: "https://images.unsplash.com/photo-1617191518965-860c78c9bc3b?auto=format&fit=crop&w=800&q=80",
-      ingredients: [
-        "1 cup mashed sweet potatoes",
-        "1 cup boiled green peas",
-        "2 cups whole wheat flour",
-        "1 tsp cumin seeds",
-        "1 tsp garam masala",
-        "Salt to taste",
-        "2 tbsp olive oil",
-        "Water as needed"
-      ],
-      steps: [
-        "Prepare dough by mixing whole wheat flour, salt, olive oil, and water. Knead well and let it rest.",
-        "Mix mashed sweet potatoes, boiled peas, cumin seeds, garam masala, and salt to prepare filling.",
-        "Divide dough into small balls and roll into circles.",
-        "Cut each circle in
+      image: "https://cdn.pixabay.com/photo/2016/03/05/20/02/samosa-1238618_1280.jpg",
+      healthy: {
+        ingredients: [
+          "1 cup mashed sweet potatoes",
+          "1 cup boiled green peas",
+          "2 cups whole wheat flour",
+          "1 tsp cumin seeds",
+          "1 tsp garam masala",
+          "Salt to taste",
+          "2 tbsp olive oil",
+          "Water as needed"
+        ],
+        steps: [
+          "Mix whole wheat flour, salt, olive oil and enough water to make a soft dough. Let it rest for 30 minutes.",
+          "Prepare filling by mixing mashed sweet potatoes, boiled peas, cumin seeds, garam masala, and salt.",
+          "Roll dough into small circles, cut each in half.",
+          "Form cones, stuff with filling, and seal edges with water.",
+          "Bake samosas at 200°C (390°F) for 25-30 minutes until golden brown."
+        ],
+        nutrition: "Calories: 180, Protein: 4g, Fat: 5g, Carbs: 30g"
+      },
+      unhealthy: {
+        ingredients: [
+          "2 cups all-purpose flour",
+          "1 cup potatoes (boiled and mashed)",
+          "1 cup boiled green peas",
+          "1 tsp cumin seeds",
+          "1 tsp garam masala",
+          "Salt to taste",
+          "Vegetable oil for deep frying"
+        ],
+        steps: [
+          "Prepare dough using all-purpose flour and water.",
+          "Mix potatoes, peas, cumin seeds, garam masala, and salt for filling.",
+          "Roll dough, stuff filling, fold and seal.",
+          "Deep fry samosas in hot oil until golden and crispy."
+        ],
+        nutrition: "Calories: 320, Protein: 5g, Fat: 18g, Carbs: 35g"
+      }
+    },
+
+    indian2: {
+      title: "Quinoa Vegetable Pulao",
+      summary: "Protein-rich quinoa cooked with colorful veggies and fragrant Indian spices.",
+      image: "https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2294776_1280.jpg",
+      healthy: {
+        ingredients: [
+          "1 cup quinoa",
+          "2 cups vegetable broth",
+          "1 cup mixed vegetables (carrots, peas, beans)",
+          "1 tsp cumin seeds",
+          "1 bay leaf",
+          "1 tsp garam masala",
+          "Salt to taste",
+          "1 tbsp olive oil"
+        ],
+        steps: [
+          "Rinse quinoa well.",
+          "Heat olive oil, add cumin seeds and bay leaf until fragrant.",
+          "Add vegetables, sauté for 3-4 minutes.",
+          "Add quinoa, broth, garam masala, and salt.",
+          "Cook covered on low heat for 15-20 minutes until quinoa is fluffy."
+        ],
+        nutrition: "Calories: 220, Protein: 7g, Fat: 4g, Carbs: 38g"
+      },
+      unhealthy: {
+        ingredients: [
+          "1 cup basmati rice",
+          "2 cups water",
+          "1 cup mixed vegetables",
+          "2 tbsp ghee or butter",
+          "1 tsp garam masala",
+          "Salt to taste",
+          "1/2 cup fried onions"
+        ],
+        steps: [
+          "Rinse rice well.",
+          "Heat ghee, add vegetables and sauté.",
+          "Add rice, water, garam masala, salt, and fried onions.",
+          "Cook covered on low heat until rice is tender and fluffy."
+        ],
+        nutrition: "Calories: 350, Protein: 6g, Fat: 15g, Carbs: 50g"
+      }
+    },
+
+    mediterranean1: {
+      title: "Grilled Falafel with Tzatziki Sauce",
+      summary: "Baked falafel balls served with low-fat Greek yogurt tzatziki for a protein-packed snack.",
+      image: "https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2294773_1280.jpg",
+      healthy: {
+        ingredients: [
+          "1 can chickpeas (drained and rinsed)",
+          "1 small onion",
+          "2 cloves garlic",
+          "1/2 cup fresh parsley",
+          "1 tsp cumin",
+          "1 tsp coriander",
+          "1 tsp baking powder",
+          "2 tbsp olive oil",
+          "Low-fat Greek yogurt",
+          "Cucumber, grated (for tzatziki)"
+        ],
+        steps: [
+          "Blend chickpeas, onion, garlic, parsley, cumin, coriander, and baking powder to a coarse mixture.",
+          "Form into balls and bake at 200°C (390°F) for 20-25 minutes, turning halfway.",
+          "Mix Greek yogurt with grated cucumber and garlic for tzatziki.",
+          "Serve falafel with tzatziki sauce."
+        ],
+        nutrition: "Calories: 210, Protein: 9g, Fat: 6g, Carbs: 28g"
+      },
+      unhealthy: {
+        ingredients: [
+          "1 can chickpeas",
+         
